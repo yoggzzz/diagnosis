@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static',filename='css/output.css')}}" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Sweet alert Js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Diagnosis Penyakit Gigi</title>
+</head>
+<body>
+    <div class="p-14 bg-gradient-to-tr from-red-400 to-sky-400">
+        <div class="p-5 bg-slate-200 rounded  shadow-2xl">
+
+            <h1 class="font-extrabold text-center text-3xl">DIAGNOSIS PENYAKIT GIGI DAN REKOMENDASI PERAWATAN</h1>
+            <form action="/hasil" id="form" method="post" class="font-sans">
+                
+                <h3 class="font-bold text-xl py-3">Pilih gejala yang dirasakan</h3>
+                <div class="grid xl:gap-x-8 xl:gap-y-4 xl:grid-cols-3 sm:grid-cols-1 sm:gap-y-3 md:grid-cols-2">
+                    {%for i in range(0, jumlah)%}
+                    <div class="flex gap-2">
+                        <div class="">
+                            <input type="checkbox" id="" value="{{array[i]}}" name="check" class="border-gray-300 rounded focus:ring-teal-5000">
+                        </div>
+                        <div class="">
+                            <label>{{array[i]}}</label>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+
+                <!-- <div class="grid gap-x-8 gap-y-4 grid-cols-3">
+                    <div>
+                        <input type="checkbox" id="" value="Terdapat lubang" name="check" class="border-gray-300 rounded focus:ring-teal-5000">
+                        <label for="">Terdapat lubang</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi terasa nyeri" name="check">
+                        <label for="">Gigi terasa nyeri</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi sakit saat terkena rangsangan (panas/dingin)" name="check">
+                        <label for="">Gigi sakit saat terkena rangsangan (panas/dingin)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Nyeri saat mengunyah" name="check">
+                        <label for="">Nyeri saat mengunyah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Permukaan gigi tampak lebih halus" name="check">
+                        <label for="">Permukaan gigi tampak lebih halus</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Perubahan warna gigi" name="check">
+                        <label for="">Perubahan warna gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi sensitif" name="check">
+                        <label for="">Gigi sensitif</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi ngilu" name="check">
+                        <label for="">Gigi ngilu</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi berwarna merah" name="check">
+                        <label for="">Gusi berwarna merah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi mudah berdarah" name="check">
+                        <label for="">Gusi mudah berdarah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi membengkak" name="check">
+                        <label for="">Gusi membengkak</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Bau mulut" name="check">
+                        <label for="">Bau mulut</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi terasa nyeri" name="check">
+                        <label for="">Gusi terasa nyeri</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi sangat sensitif" name="check">
+                        <label for="">Gigi sangat sensitif</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Nyeri berdenyut" name="check">
+                        <label for="">Nyeri berdenyut</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Rangsang nyeri saat malam/berbaring" name="check">
+                        <label for="">Rangsang nyeri saat malam/berbaring</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Pipi bengkak" name="check">
+                        <label for="">Pipi bengkak</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Nyeri secara spontan" name="check">
+                        <label for="">Nyeri secara spontan</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Demam" name="check">
+                        <label for="">Demam</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Rasa nyeri menyebar sampai area leher" name="check">
+                        <label for="">Rasa nyeri menyebar sampai area leher</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi bernanah" name="check">
+                        <label for="">Gusi bernanah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sulit menelan" name="check">
+                        <label for="">Sulit menelan</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Nyeri saat disentuh" name="check">
+                        <label for="">Nyeri saat disentuh</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Resesi gusi (gigi terlihat lebih panjang)" name="check">
+                        <label for="">Resesi gusi (gigi terlihat lebih panjang)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi berdarah" name="check">
+                        <label for="">Gusi berdarah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Penumpukan sisa makanan pada gigi" name="check">
+                        <label for="">Penumpukan sisa makanan pada gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi terasa renggang" name="check">
+                        <label for="">Gigi terasa renggang</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Perubahan warna gigi" name="check">
+                        <label for="">Gusi terasa lebih halus</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Plak gigi yang mengeras" name="check">
+                        <label for="">Plak gigi yang mengeras</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Plak gigi berwarna kuning" name="check">
+                        <label for="">Plak gigi berwarna kuning</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Plak gigi berwarna abu-abu" name="check">
+                        <label for="">Plak gigi berwarna abu-abu</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Karang gigi" name="check">
+                        <label for="">Karang gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Radang gusi" name="check">
+                        <label for="">Radang gusi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Rahang atas dan bawah tidak menyatu" name="check">
+                        <label for="">Rahang atas dan bawah tidak menyatu</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Rahang bawah lebih maju" name="check">
+                        <label for="">Rahang bawah lebih maju</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Rahang atas sangat maju" name="check">
+                        <label for="">Rahang atas sangat maju</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kesulitan mengunyah" name="check">
+                        <label for="">Kesulitan mengunyah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi tidak rapi" name="check">
+                        <label for="">Gigi tidak rapi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Terdapat ulkus (luka) pada rongga mulut" name="check">
+                        <label for="">Terdapat ulkus (luka) pada rongga mulut</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sensasi terbakar pada lidah" name="check">
+                        <label for="">Sensasi terbakar pada lidah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Muncul warna kemerahan disertai nyeri" name="check">
+                        <label for="">Muncul warna kemerahan disertai nyeri</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Luka berwarna putih" name="check">
+                        <label for="">Luka berwarna putih</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Terasa perih saat makan dan minum" name="check">
+                        <label for="">Terasa perih saat makan dan minum</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kesulitan membuka mulut" name="check">
+                        <label for="">Kesulitan membuka mulut</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kesulitan mengunyah" name="check">
+                        <label for="">Kesulitan mengunyah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Nyeri pada rahang" name="check">
+                        <label for="">Nyeri pada rahang</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sakit kepala" name="check">
+                        <label for="">Sakit kepala</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi bungsu hanya muncul sedikit pada permukaan (tertutup gusi)" name="check">
+                        <label for="">Gigi bungsu hanya muncul sedikit pada permukaan (tertutup gusi)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Tidak ada gigi" name="check">
+                        <label for="">Tidak ada gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi lepas" name="check">
+                        <label for="">Gigi lepas</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi bercelah" name="check">
+                        <label for="">Gigi bercelah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi tidak lengkap" name="check">
+                        <label for="">Gigi tidak lengkap</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi tidak rapi" name="check">
+                        <label for="">Gigi tidak rapi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sulit untuk mengunyah" name="check">
+                        <label for="">Sulit untuk mengunyah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi tidak utuh" name="check">
+                        <label for="">Gigi tidak utuh</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Terdapat retakan pada gigi" name="check">
+                        <label for="">Terdapat retakan pada gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi pecah" name="check">
+                        <label for="">Gigi pecah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi terkikis bagian ujung" name="check">
+                        <label for="">Gigi terkikis bagian ujung</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kebiasan menggertakan gigi" name="check">
+                        <label for="">Kebiasan menggertakan gigi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi lebih sensitif" name="check">
+                        <label for="">Gigi lebih sensitif</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi lebih tipis" name="check">
+                        <label for="">Gigi lebih tipis</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi goyah" name="check">
+                        <label for="">Gigi goyah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi terasa tidak kuat" name="check">
+                        <label for="">Gigi terasa tidak kuat</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Terdapat gigi berwarna hitam" name="check">
+                        <label for="">Terdapat gigi berwarna hitam</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sisa gigi berlubang" name="check">
+                        <label for="">Sisa gigi berlubang</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Sisa gigi berwarna coklat" name="check">
+                        <label for="">Sisa gigi berwarna coklat</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Mahkota gigi hilang lebih dari 2/3" name="check">
+                        <label for="">Mahkota gigi hilang lebih dari 2/3</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi bertumpuk" name="check">
+                        <label for="">Gigi bertumpuk</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi gingsul" name="check">
+                        <label for="">Gigi gingsul</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gigi sulit dibersihkan" name="check">
+                        <label for="">Gigi sulit dibersihkan</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kesulitan dalam pelafalan (Cedal)" name="check">
+                        <label for="">Kesulitan dalam pelafalan (Cedal)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Kesulitan menggerakkan lidah" name="check">
+                        <label for="">Kesulitan menggerakkan lidah</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Pinggiran gusi membulat" name="check">
+                        <label for="">Pinggiran gusi membulat</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi halus" name="check">
+                        <label for="">Gusi halus</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi tumbuh berlebih" name="check">
+                        <label for="">Gusi tumbuh berlebih</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi menutupi gigi secara berlebih" name="check">
+                        <label for="">Gusi menutupi gigi secara berlebih</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Benjolan pada gusi" name="check">
+                        <label for="">Benjolan pada gusi</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Gusi menonjol pada area berlubang" name="check">
+                        <label for="">Gusi menonjol pada area berlubang</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="" value="Benjolan berwarna merah atau putih di area gigi berlubang" name="check">
+                        <label for="">Benjolan berwarna merah atau putih di area gigi berlubang</label>
+                    </div>
+                </div> -->
+                
+                <div class="flex justify-center">
+                    <input type="submit" value="Proses" class="p-3 bg-sky-500 text-white px-5 mt-3 rounded">
+                </div>
+            </form>
+        
+            
+            <div id="result" class="p-10">
+                <p>{{input_data}}</p>
+                <h1 class="md:text-3xl font-bold uppercase sm:text-xl">{{ hasil_prediksi }}</h1>
+                
+                <p class="md:text-xl sm:text-xs sm:text-justify">
+                    {{deskripsi}}
+                </p>
+
+                <p>
+                    <span class="capitalize font-bold text-xl">{{perawatan}}</span>
+                </p>
+
+                <h1 class="text-3xl font-bold text-red-500 uppercase sm:text-center">{{error}}</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+         if ('{{hasil_prediksi}}' || '{{error}}') {
+            var element = document.getElementById("result");
+            element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
